@@ -1,0 +1,13 @@
+package com.example.app.domain.dto.mapper;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.example.app.domain.dto.MemoDto;
+
+import org.apache.ibatis.annotations.*;
+
+@Mapper
+public interface MemoMapper {
+	@Insert("insert into tblmemo valus(#{id},#{text})")
+	public int Insert(MemoDto memoDto);
+}

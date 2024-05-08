@@ -1,0 +1,40 @@
+package com.example.app.mybatis;
+
+import static org.junit.Assert.fail;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.example.app.DataSource.DataSourceTests;
+import com.example.app.domain.dto.MemoDto;
+import com.example.app.domain.dto.mapper.MemoMapper;
+
+import lombok.val;
+import lombok.extern.slf4j.Slf4j;
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations ={"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
+@Slf4j
+public class MybatisTests {
+	
+	@Autowired
+	private SqlSessionFactory sqlSessionFactory;
+	@Autowired
+	private MemoMapper memoMapper;
+	
+	
+	@Test
+	public void sqlSessionFactoryTests() {
+		log.info(sqlSessionFactory.toString());
+	
+	}
+	@Test
+	public void memoTests() {
+		memoMapper.Delete(123);
+	}
+}

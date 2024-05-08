@@ -1,0 +1,27 @@
+package com.example.app.mybatis;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.example.app.DataSource.DataSourceTests;
+import com.example.app.domain.dto.BoardDto;
+import com.example.app.domain.mapper.BoardMapper;
+
+import lombok.extern.slf4j.Slf4j;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@Slf4j
+public class mybatisTest {
+
+	@Autowired
+	private BoardMapper boardMapper;
+	
+	@Test
+	public void InsertTest() {
+		boardMapper.Insert(new BoardDto(1L,"제목1", "내용1", "작성자1", "1월1일"));
+	}
+}

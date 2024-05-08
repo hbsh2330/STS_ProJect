@@ -1,0 +1,5 @@
+package com.example.app.restcontroller;
+
+public class MemoRestController {
+
+}

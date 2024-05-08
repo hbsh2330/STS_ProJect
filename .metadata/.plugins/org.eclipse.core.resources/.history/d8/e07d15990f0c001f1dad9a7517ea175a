@@ -1,0 +1,25 @@
+package com.example.app.domain.dto.mapper;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.example.app.domain.dto.MemoDto;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.*;
+
+@Mapper
+public interface MemoMapper {
+	@Insert("insert into tblmemo values(#{id},#{text})")
+	public int Insert(MemoDto memoDto);
+	
+	@Update("update tbl_memo set text=#{text} where id=#{id}")
+	public int Update(MemoDto memoDto);
+	
+	@Delete()
+	public int Delete(int id);
+	
+	public MemoDto SelectAt(int id);
+	
+	public List<MemoDto> SelectAll();
+}

@@ -1,0 +1,5 @@
+ackage com.example.app.domain;
+
+public class MemoDagImpl {
+
+}

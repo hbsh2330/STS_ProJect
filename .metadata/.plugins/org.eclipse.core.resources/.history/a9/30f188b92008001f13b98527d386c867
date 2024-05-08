@@ -1,0 +1,24 @@
+package com.example.app.domain.dto;
+
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.Data;
+import lombok.ToString;
+
+@Data
+@ToString
+public class UserDto {
+	private String username;
+	private String password;
+	private String repassword;
+	private String nickname;
+	private String phone;
+	private String address;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private LocalDate birthday;
+	private String hobbys[];
+	private String hobbys2[];
+	
+}

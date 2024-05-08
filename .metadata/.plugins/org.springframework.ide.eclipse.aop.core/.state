@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="ex01_Lombok_Di_JunitTests"/>
+<aop-project name="ex02_ParameterTest"/>
+<aop-project name="ex05_SqlMpper_Mabts"/>
+<aop-project name="ex04_DataSource2"/>
+<aop-project name="ex00_init"/>
+<aop-project name="ex04_DataSource"/>
+</aop-reference-model>

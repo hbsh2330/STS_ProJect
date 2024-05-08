@@ -1,0 +1,43 @@
+package com.example.app.controller;
+
+import java.util.Iterator;
+
+import javax.validation.Valid;
+
+import org.apache.commons.logging.Log;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.app.domain.dto.MemoDto;
+
+import lombok.extern.slf4j.Slf4j;
+
+
+@Controller
+@Slf4j
+@RequestMapping("/memo")
+public class MemoController {
+	@GetMapping("/add")
+	public String get_memo() {
+		
+		log.info("get_memo");
+		return "/memo/add";
+	}
+	@PostMapping("/add")
+	public void post_memo(@ModelAttribute @Valid MemoDto dto, BindingResult bindingResult, Model model) {
+		log.info("post_memo" + dto);
+		if (bindingResult.hasFieldErrors()) { // 에러가 발생했다면
+//			log.info("validationCheck Error : " + bindingResult.getFieldError("id").getDefaultMessage()); 
+			for(FieldError error : bindingResult.getFieldErrors()) {
+				log.info("ErrorField : " + error.getField() + " ErrorMsg : " + error.getDefaultMessage()); 
+				model.addAttribute(error.getField(), error.getDefaultMessage());
+			}
+		}
+	}
+}

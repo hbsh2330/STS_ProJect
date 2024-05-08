@@ -1,0 +1,13 @@
+package com.example.app.domain.mapper;
+
+import java.util.List;
+
+import com.example.app.domain.dto.BoardDto;
+
+public interface BoardMapper {
+	int Insert(BoardDto boardDto);
+	int Update(BoardDto boardDto);
+	int Delete(BoardDto boardDto);
+	int SelectOne(Long id);
+	List<BoardDto> SelectAll();
+}

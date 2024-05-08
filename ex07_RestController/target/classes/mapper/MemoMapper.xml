@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.app.domain.dto.mapper.MemoMapper">
+	<insert id="InsertXML" useGeneratedKeys="true" keyProperty="id"
+		parameterType="com.example.app.domain.dto.MemoDto">
+		<selectKey keyProperty="id" order="AFTER" resultType="int">
+			select
+			max(id)+1 from tblmemo
+		</selectKey>
+		insert into tblmemo values(null,#{text})
+	</insert>
+	<select id="SelectAtXML" parameterType="int"
+		resultType="com.example.app.domain.dto.MemoDto">
+		select * from tblmemo where id=#{id}
+	</select>
+	<select id="SelectAllXML"
+		resultType="com.example.app.domain.dto.MemoDto">
+		select * from tblmemo
+	</select>
+	<!-- 동적쿼리 적용 -->
+	<select id="SelectIf" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		<if test="type.eqals('text')">
+			select * from tblmemo where text like concat('%', #{text},
+			'%')
+		</if>
+	</select>
+
+	<select id="SelectWhen" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		select * from tblmemo
+		<if test="condition== true">
+			where
+			<choose>
+				<when test="type!=null and type.equals('id')">
+					id like concat('%', #{id}, '%')
+				</when>
+				<when test="type!=null and type.equals('text')">
+					text like concat('%', #{text}, '%')
+				</when>
+			</choose>
+		</if>
+	</select>
+
+	<select id="SelectAllMemo"
+		parameterType="com.example.app.domain.dto.MemoDto"
+		resultType="com.example.app.domain.dto.MemoDto">
+		select * from tblmemo
+		<if test='id!=null and id!="" and text!=null and text!=""'>
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<choose>
+				<when test='id!=null and id!=""'>
+					AND id like concat('%', #{id}, '%')
+				</when>
+				<when test='text!=null and text!=""'>
+					AND text like concat('%', #{text}, '%')
+				</when>
+			</choose>
+		</trim>
+		</if>
+	</select>
+</mapper>
